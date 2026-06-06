@@ -1,0 +1,5 @@
+32ed06d (HEAD -> master) Agrega documentacion calidad y configuracion para despliegue cloud
+dbefa9a Refactoriza permisos y calculos del dashboard en funciones reutilizables
+d7c9fff Implementa productos ventas y dashboard inicial con logica duplicada
+03cf3d6 Agrega autenticacion con roles y modelos de base de datos
+f84a26c Inicializa estructura base del proyecto FARMABOL
