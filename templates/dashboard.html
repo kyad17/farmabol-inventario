@@ -1,5 +1,47 @@
 {% extends 'base.html' %}
 {% block content %}
 <h2>Dashboard FARMABOL</h2>
-<p>Bienvenido {{ session.get('username') }}. Rol: {{ session.get('role') }}</p>
+<p>Usuario: {{ session.get('username') }} | Rol: {{ session.get('role') }}</p>
+<div class="row g-3">
+    <div class="col-md-4">
+        <div class="card shadow">
+            <div class="card-body">
+                <h5>Total de ventas del día</h5>
+                <h2 id="totalToday">Bs {{ '%.2f'|format(total_today) }}</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <div class="card shadow">
+            <div class="card-body">
+                <h5>Productos con stock bajo (&lt; 5)</h5>
+                <ul id="lowStockList">
+                    {% for item in low_stock %}
+                    <li>{{ item.code }} - {{ item.name }}: {{ item.stock }} unidades</li>
+                    {% else %}
+                    <li>No existen productos con stock bajo.</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+async function cargarDashboard() {
+    const res = await fetch("{{ url_for('api_dashboard') }}");
+    if (!res.ok) return;
+    const data = await res.json();
+    document.getElementById("totalToday").innerText = "Bs " + data.total_today.toFixed(2);
+    const list = document.getElementById("lowStockList");
+    list.innerHTML = "";
+    if (data.low_stock.length === 0) {
+        list.innerHTML = "<li>No existen productos con stock bajo.</li>";
+    } else {
+        data.low_stock.forEach(item => {
+            list.innerHTML += `<li>${item.code} - ${item.name}: ${item.stock} unidades</li>`;
+        });
+    }
+}
+setInterval(cargarDashboard, 5000);
+</script>
 {% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Registrar venta</h2>
+<form method="post" class="card card-body shadow">
+    <label class="form-label">Producto</label>
+    <select class="form-select mb-3" name="product_id" required>
+        {% for product in products %}
+        <option value="{{ product.id }}">{{ product.name }} - Stock: {{ product.stock }} - Bs {{ product.price }}</option>
+        {% endfor %}
+    </select>
+    <label class="form-label">Cantidad</label>
+    <input class="form-control mb-3" type="number" name="quantity" min="1" required>
+    <button class="btn btn-success">Registrar venta</button>
+</form>
+{% endblock %}
