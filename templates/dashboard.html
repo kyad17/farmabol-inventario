@@ -1,0 +1,5 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Dashboard FARMABOL</h2>
+<p>Bienvenido {{ session.get('username') }}. Rol: {{ session.get('role') }}</p>
+{% endblock %}
