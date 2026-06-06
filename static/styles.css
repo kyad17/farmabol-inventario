@@ -1,7 +1,21 @@
 body {
     background: #f4f8f5;
 }
+
 .card {
     border: none;
     border-radius: 14px;
+}
+
+.navbar-brand {
+    letter-spacing: 0.5px;
+}
+
+.table {
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.btn {
+    border-radius: 10px;
 }

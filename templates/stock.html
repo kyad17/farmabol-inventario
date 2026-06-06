@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Consulta de stock</h2>
+<p class="text-muted">El vendedor puede consultar existencias sin modificar productos.</p>
+<table class="table table-hover bg-white shadow-sm">
+    <thead>
+        <tr>
+            <th>Código</th><th>Producto</th><th>Laboratorio</th><th>Precio</th><th>Stock</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for product in products %}
+        <tr>
+            <td>{{ product.code }}</td>
+            <td>{{ product.name }}</td>
+            <td>{{ product.laboratory }}</td>
+            <td>Bs {{ '%.2f'|format(product.price) }}</td>
+            <td>
+                <span class="badge {% if product.stock < 5 %}text-bg-danger{% else %}text-bg-success{% endif %}">
+                    {{ product.stock }}
+                </span>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
